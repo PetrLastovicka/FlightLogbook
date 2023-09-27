@@ -1,10 +1,18 @@
 package com.pl.flightsmaven.flights;
 
 import com.pl.flightsmaven.wings.Wing;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
 @Entity
+@Data
+@NoArgsConstructor
 public class Flight {
-   @ManyToOne
-   Wing wing;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
+    @ManyToOne
+    Wing wing;
 }
