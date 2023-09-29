@@ -1,15 +1,11 @@
 package com.pl.flightsmaven.wings;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+
+
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.lang.NonNull;
 
 import java.time.LocalDate;
 
@@ -18,9 +14,14 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class NewWingDTO {
+   
+   @NonNull
    String manufacturer;
+   @NonNull
    String model;
+   @NonNull
    String size;
+   
    @Enumerated(EnumType.STRING)
    Category category;
    boolean my;

@@ -2,17 +2,32 @@ package com.pl.flightsmaven.flights;
 
 import com.pl.flightsmaven.wings.Wing;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 
 @Entity
+@Table(name = "flights")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Flight {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    @ManyToOne
-    Wing wing;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	Long id;
+	@ManyToOne
+	@JoinColumn(name = "wing_id")
+	Wing wing;
+	String location;
+	LocalDate date;
+	LocalTime startTime;
+	float duration;
+	int maxAltitude;
+	int minAltitude;
+	float maxSink;
+	float maxClimb;
+	float odometer;
 }

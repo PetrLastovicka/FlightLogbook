@@ -1,15 +1,11 @@
 package com.pl.flightsmaven.wings;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pl.flightsmaven.flights.Flight;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -34,6 +30,7 @@ public class Wing {
     float nextCheckHours;
     float totalHours;
     boolean active;
+    @JsonIgnore
     @OneToMany(mappedBy = "wing", cascade = CascadeType.ALL)
     List<Flight> flights;
 }
