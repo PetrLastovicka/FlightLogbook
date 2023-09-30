@@ -14,6 +14,7 @@ public class WingServiceImpl implements WingService {
 	
 	
 	@Override
+	// TODO: 29.09.2023 Implement validation
 	public Wing create(@Validated NewWingDTO request) {
 		if (request.my) {
 			Wing wing = Wing
