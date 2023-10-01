@@ -1,5 +1,6 @@
 package com.pl.flightsmaven.security;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +19,7 @@ public class AuthController {
 	private final AuthenticationManager authManager;
 	
 	@PostMapping("/login")
-	public String token(@RequestBody LoginRequest loginRequest) {
+	public String token(@Valid @RequestBody LoginDTO loginRequest) {
 		Authentication authentication = authManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.username(), loginRequest.password()));
 		LOG.debug("Token requested for user: '{}'", authentication.getName());
 		String token = jwtService.generateToken(authentication);

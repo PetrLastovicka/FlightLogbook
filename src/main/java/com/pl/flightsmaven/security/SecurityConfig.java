@@ -35,9 +35,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 	private final RsaKeyProperties jwtConfigProperties;
 	
-/*	public SecurityConfig(RsaKeyProperties jwtConfigProperties) {
-		this.jwtConfigProperties = jwtConfigProperties;
-	}*/
+
 	
 	@Bean
 	public AuthenticationManager authManager(UserDetailsService userDetailsService) {
@@ -64,7 +62,7 @@ public class SecurityConfig {
 				  .csrf(crsf -> crsf.disable())
 				  .authorizeHttpRequests( auth -> auth
 							 .requestMatchers("/login").permitAll()
-							 .anyRequest().permitAll()//.authenticated()
+							 .anyRequest().authenticated()
 				  )
 				  .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				  .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)

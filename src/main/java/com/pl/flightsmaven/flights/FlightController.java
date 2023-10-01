@@ -14,6 +14,7 @@ public class FlightController {
 		return ResponseEntity.status(200).body(flightService.getAll());
 	}
 	@PostMapping
+		// TODO: 01.10.2023 add validation?
 	ResponseEntity<?> create(@RequestBody NewFlightDTO request) {
 		return ResponseEntity.status(201).body(flightService.create(request));
 	}

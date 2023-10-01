@@ -4,29 +4,42 @@ package com.pl.flightsmaven.wings;
 
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import lombok.*;
-import org.springframework.lang.NonNull;
-
+import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class NewWingDTO {
+
+record NewWingDTO (
    
-   @NonNull
-   String manufacturer;
-   @NonNull
-   String model;
-   @NonNull
-   String size;
-   
+   @NotBlank
+   String manufacturer,
+   @NotBlank
+   String model,
+   @NotBlank
+   String size,
+   @NotBlank
    @Enumerated(EnumType.STRING)
-   Category category;
-   boolean my;
-   LocalDate purchased;
-   float initialHours;
-   LocalDate nextCheckDate;
-   float nextCheckHours;
+   Category category,
+   @NotBlank
+   boolean my,
+   LocalDate purchased,
+   float initialHours,
+   LocalDate nextCheckDate,
+   float nextCheckHours
+){
+   public Wing toWing(){
+      return new Wing(
+              null,
+             manufacturer,
+              model,
+              size,
+              category,
+              my,
+              purchased,
+              initialHours,
+              nextCheckDate,
+              nextCheckHours,
+              initialHours,
+              true,
+              null);
+   }
 }

@@ -2,7 +2,6 @@ package com.pl.flightsmaven.wings;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,6 +14,7 @@ public class WingController {
       return ResponseEntity.status(200).body(wingService.getAll());
    }
    @PostMapping
+      //TODO: 01.10.2023  add validation?
    ResponseEntity<?> create(@RequestBody NewWingDTO request){
       return ResponseEntity.status(201).body(wingService.create(request));
    }
