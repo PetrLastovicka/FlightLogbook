@@ -1,5 +1,7 @@
 package com.pl.flightsmaven.security;
 
+import com.pl.flightsmaven.users.AppUserService;
+import com.pl.flightsmaven.users.RegisterDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,12 +12,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/auth")
-public class AuthController {
+class AuthController {
 	final AuthService authService;
-	
+	final AppUserService appUserService;
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody LoginDTO loginRequest) {
+	ResponseEntity<?> login(@RequestBody LoginDTO loginRequest) {
 		return ResponseEntity.status(200).body(authService.login(loginRequest));
+		
+	}
+	@PostMapping("/register")
+	ResponseEntity<?> register(@RequestBody RegisterDTO registerRequest) {
+		return ResponseEntity.status(200).body(appUserService.register(registerRequest));
 		
 	}
 }

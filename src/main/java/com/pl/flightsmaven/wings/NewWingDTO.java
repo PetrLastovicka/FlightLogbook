@@ -26,7 +26,7 @@ record NewWingDTO (
    LocalDate nextCheckDate,
    float nextCheckHours
 ){
-   public Wing toWing(){
+   Wing toWing(){
       return new Wing(
               null,
              manufacturer,
