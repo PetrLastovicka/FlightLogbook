@@ -15,6 +15,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
@@ -35,8 +36,6 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 	private final RsaKeyProperties jwtConfigProperties;
 	
-
-	
 	@Bean
 	public AuthenticationManager authManager(UserDetailsService userDetailsService) {
 		var authProvider = new DaoAuthenticationProvider();
@@ -55,13 +54,12 @@ public class SecurityConfig {
 		);
 	}
 	
-	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return http
-				  .csrf(crsf -> crsf.disable())
-				  .authorizeHttpRequests( auth -> auth
-							 .requestMatchers("/login").permitAll()
+				  .csrf(AbstractHttpConfigurer::disable)
+				  .authorizeHttpRequests(auth -> auth
+							 .requestMatchers("/api/auth/**").permitAll()
 							 .anyRequest().authenticated()
 				  )
 				  .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -72,13 +70,6 @@ public class SecurityConfig {
 				  )
 				  .build();
 	}
-	
-	/*@Bean
-	public JWKSource<SecurityContext> jwkSource() {
-		rsaKey = Jwks.generateRsa();
-		JWKSet jwkSet = new JWKSet(rsaKey);
-		return (jwkSelector, securityContext) -> jwkSelector.select(jwkSet);
-	}*/
 	
 	@Bean
 	JwtDecoder jwtDecoder() {
@@ -91,6 +82,5 @@ public class SecurityConfig {
 		JWKSource<SecurityContext> jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
 		return new NimbusJwtEncoder(jwks);
 	}
-	
 	
 }

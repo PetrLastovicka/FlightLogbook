@@ -14,8 +14,9 @@ public class FlightService {
 	Flight create(NewFlightDTO request){
 		//TODO: handle null DTO
 		// TODO: 01.10.2023 implement to flight in DTO
+		// TODO: 01.10.2023 handle not found wing
 		Flight flight = Flight.builder()
-				  .wing(wingRepo.findById(request.wingId()).get())
+				  .wing(wingRepo.findById(request.wingId()).orElseThrow())
 				  .location(request.location())
 				  .date(request.date())
 				  .duration(request.duration())

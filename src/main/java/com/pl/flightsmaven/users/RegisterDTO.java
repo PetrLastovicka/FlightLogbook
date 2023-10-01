@@ -1,7 +1,5 @@
 package com.pl.flightsmaven.users;
 
-import com.pl.flightsmaven.users.AppUser;
-import com.pl.flightsmaven.users.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
@@ -10,7 +8,7 @@ import java.util.Set;
 import static com.pl.flightsmaven.users.Role.ROLE_USER;
 
 public record RegisterDTO(
-		  @NotBlank(message = "email is mandatory")
+		  @NotBlank(message = "username is mandatory")
 		  String name,
 		  @NotBlank(message = "email is mandatory")
 		  @Email(message = "Invalid email")

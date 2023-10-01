@@ -1,7 +1,7 @@
 package com.pl.flightsmaven.users;
 
-
-import jakarta.validation.Valid;
+import com.pl.flightsmaven.errors.DatabaseException;
+import jakarta.persistence.EntityExistsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,8 +9,17 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AppUserService {
 	private final AppUserRepo appUserRepo;
-	public AppUser register(@Valid RegisterDTO registerRequest) {
-		return appUserRepo.save(registerRequest.toAppUser());
+	
+	public AppUser register(RegisterDTO registerRequest) {
+		if (appUserRepo.existsByEmail(registerRequest.email())) {
+			throw new EntityExistsException(String.format("Email %s is already registered", registerRequest.email()));
+		}
+		try {
+			return appUserRepo.save(registerRequest.toAppUser());
+		} catch (Exception e) {
+			throw new DatabaseException("Saving to database failed");
+		}
+		
 	}
 	
 }

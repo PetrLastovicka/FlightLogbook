@@ -5,8 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 
 public record LoginDTO(
 		  @NotBlank(message = "email is mandatory")
-		  @Email(message = "Invalid email")
-		  String username,
+		  //@Email(message = "Invalid email")
+		  String email,
 		  @NotBlank(message = "password is mandatory")
 		  String password
 ) {
