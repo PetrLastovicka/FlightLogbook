@@ -19,7 +19,5 @@ public class AppUserService {
 		} catch (Exception e) {
 			throw new DatabaseException("Saving to database failed");
 		}
-		
 	}
-	
 }

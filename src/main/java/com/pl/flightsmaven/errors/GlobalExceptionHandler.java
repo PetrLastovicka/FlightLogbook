@@ -5,19 +5,24 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import java.util.List;
 
-import java.util.NoSuchElementException;
 
 @RestControllerAdvice
 class GlobalExceptionHandler {
+	//for use with @Valid annotation
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	ResponseEntity<?> handleValidationExceptions(MethodArgumentNotValidException e) {
-		// TODO: 01.10.2023 update to return all errors
-		return ResponseEntity.status(406).body(e.getBindingResult().getAllErrors().get(0).getDefaultMessage());
-		
+		List<String> errors = e.getBindingResult()
+				  .getFieldErrors()
+				  .stream()
+				  .map(x -> x.getDefaultMessage())
+				  .toList();
+		return ResponseEntity.status(406).body(errors);
 	}
+	
 	@ExceptionHandler(EntityExistsException.class)
-	ResponseEntity<?> handleDataIntegrityViolationException(EntityExistsException e) {
+	ResponseEntity<?> handleEntityExistsExceptionException(EntityExistsException e) {
 		return ResponseEntity.status(409).body(e.getMessage());
 	}
 	
@@ -25,7 +30,4 @@ class GlobalExceptionHandler {
 	ResponseEntity<?> handleDatabaseException(DatabaseException e) {
 		return ResponseEntity.status(500).body(e.getMessage());
 	}
-	
-	
-	
 }
