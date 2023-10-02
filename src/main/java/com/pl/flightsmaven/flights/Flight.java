@@ -1,5 +1,7 @@
 package com.pl.flightsmaven.flights;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.pl.flightsmaven.wings.Wing;
 import jakarta.persistence.*;
 import lombok.*;
@@ -14,6 +16,9 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class,
+		  property = "id")
 public class Flight {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
