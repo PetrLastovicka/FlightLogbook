@@ -17,12 +17,14 @@ class AuthController {
 	final AuthService authService;
 	final AppUserService appUserService;
 	@PostMapping("/login")
-	ResponseEntity<?> login(@RequestBody @Valid LoginDTO loginRequest) {
+	ResponseEntity<?> login(@RequestBody(required = false) @Valid LoginDTO loginRequest) {
+		if(loginRequest == null) return ResponseEntity.status(400).body("loginRequest body is null");
 		return ResponseEntity.status(200).body(authService.login(loginRequest));
 		
 	}
 	@PostMapping("/register")
-	ResponseEntity<?> register(@RequestBody @Valid RegisterDTO registerRequest) {
+	ResponseEntity<?> register(@RequestBody(required = false) @Valid RegisterDTO registerRequest) {
+		if(registerRequest == null) return ResponseEntity.status(400).body("registerRequest body is null");
 		return ResponseEntity.status(200).body(appUserService.register(registerRequest));
 	}
 }

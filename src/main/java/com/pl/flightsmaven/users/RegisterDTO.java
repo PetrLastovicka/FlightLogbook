@@ -2,7 +2,6 @@ package com.pl.flightsmaven.users;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-
 import java.util.Set;
 
 import static com.pl.flightsmaven.users.Role.ROLE_USER;
