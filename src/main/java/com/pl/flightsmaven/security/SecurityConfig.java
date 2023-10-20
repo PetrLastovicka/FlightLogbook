@@ -6,6 +6,7 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import com.pl.flightsmaven.users.AppUserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +21,8 @@ import org.springframework.security.config.annotation.web.configurers.oauth2.ser
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
@@ -34,16 +37,21 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
-	private final RsaKeyProperties jwtConfigProperties;
-	
-	@Bean
-	public AuthenticationManager authManager(UserDetailsService userDetailsService) {
-		var authProvider = new DaoAuthenticationProvider();
-		authProvider.setUserDetailsService(userDetailsService);
-		return new ProviderManager(authProvider);
+	final RsaKeyProperties jwtConfigProperties;
+	final AppUserRepo userRepo;
+	public UserDetailsService userDetailService() {
+		return username -> userRepo.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
 	}
 	
 	@Bean
+	public AuthenticationManager authManager() {
+		var authProvider = new DaoAuthenticationProvider();
+		authProvider.setUserDetailsService(userDetailService());
+		authProvider.setPasswordEncoder(passwordEncoder());
+		return new ProviderManager(authProvider);
+	}
+	
+	/*@Bean
 	public UserDetailsService users() {
 		return new InMemoryUserDetailsManager(
 				  User.withUsername("user")
@@ -52,7 +60,7 @@ public class SecurityConfig {
 							 .authorities("read")
 							 .build()
 		);
-	}
+	}*/
 	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -60,6 +68,7 @@ public class SecurityConfig {
 				  .csrf(AbstractHttpConfigurer::disable)
 				  .authorizeHttpRequests(auth -> auth
 							 .requestMatchers("/api/auth/**").permitAll()
+							 .requestMatchers("/api/users/register").permitAll()
 							 .anyRequest().permitAll()//.authenticated()
 				  )
 				  .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -81,6 +90,10 @@ public class SecurityConfig {
 		JWK jwk = new RSAKey.Builder(jwtConfigProperties.publicKey()).privateKey(jwtConfigProperties.privateKey()).build();
 		JWKSource<SecurityContext> jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
 		return new NimbusJwtEncoder(jwks);
+	}
+	@Bean
+	public BCryptPasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
 	}
 	
 }

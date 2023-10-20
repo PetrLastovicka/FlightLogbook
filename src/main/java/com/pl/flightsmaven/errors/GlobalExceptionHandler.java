@@ -3,6 +3,7 @@ package com.pl.flightsmaven.errors;
 import jakarta.persistence.EntityExistsException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -32,6 +33,10 @@ class GlobalExceptionHandler {
 	
 	@ExceptionHandler(DatabaseException.class)
 	ResponseEntity<?> handleDatabaseException(DatabaseException e) {
+		return ResponseEntity.status(500).body(e.getMessage());
+	}
+	@ExceptionHandler(UsernameNotFoundException.class)
+	ResponseEntity<?> handleUsernameNotFoundException(UsernameNotFoundException e) {
 		return ResponseEntity.status(500).body(e.getMessage());
 	}
 }
