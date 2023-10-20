@@ -7,10 +7,10 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 @EnableConfigurationProperties(RsaKeyProperties.class)
 @SpringBootApplication
-public class FlightsMavenApplication {
+public class PGFLightsLogger {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FlightsMavenApplication.class, args);
+		SpringApplication.run(PGFLightsLogger.class, args);
 	}
 
 }
