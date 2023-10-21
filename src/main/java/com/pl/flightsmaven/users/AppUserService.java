@@ -5,7 +5,6 @@ import jakarta.persistence.EntityExistsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.Set;
 
 @Service
@@ -23,7 +22,6 @@ public class AppUserService {
 					  .name(registerRequest.name())
 					  .email(registerRequest.email())
 					  .password(passwordEncoder.encode(registerRequest.password()))
-					//  .password(registerRequest.password())
 					  .roles(Set.of(Role.ROLE_USER))
 					  .build();
 			return appUserRepo.save(appUser);
