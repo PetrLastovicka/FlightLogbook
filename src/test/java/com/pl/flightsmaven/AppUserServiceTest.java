@@ -4,7 +4,6 @@ import com.pl.flightsmaven.users.AppUser;
 import com.pl.flightsmaven.users.AppUserService;
 import com.pl.flightsmaven.users.RegisterDTO;
 import jakarta.persistence.EntityExistsException;
-import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

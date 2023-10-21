@@ -39,6 +39,7 @@ record NewWingDTO (
               nextCheckDate,
               nextCheckHours,
               initialHours,
+               0,
               true,
               null);
    }

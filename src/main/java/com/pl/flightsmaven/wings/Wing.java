@@ -33,6 +33,7 @@ public class Wing {
 	LocalDate nextCheckDate;
 	float nextCheckHours;
 	float totalHours;
+	int totalFlights;
 	boolean active;
 	//@JsonIgnore
 	@OneToMany(mappedBy = "wing", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

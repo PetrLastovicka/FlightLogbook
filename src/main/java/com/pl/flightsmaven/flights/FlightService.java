@@ -1,8 +1,12 @@
 package com.pl.flightsmaven.flights;
 
+import com.pl.flightsmaven.errors.DatabaseException;
+import com.pl.flightsmaven.wings.Wing;
 import com.pl.flightsmaven.wings.WingRepo;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -11,21 +15,45 @@ public class FlightService {
 	final FlightRepo flightRepo;
 	final WingRepo wingRepo;
 	
-	Flight create(NewFlightDTO request){
+	Flight create(NewFlightDTO request) {
 		//TODO: handle null DTO
-		// TODO: 01.10.2023 implement to flight in DTO
-		// TODO: 01.10.2023 handle not found wing
-		Flight flight = Flight.builder()
-				  .wing(wingRepo.findById(request.wingId()).orElseThrow())
-				  .location(request.location())
-				  .date(request.date())
-				  .duration(request.duration())
-				  .build();
-		return flightRepo.save(flight);
-	}
-	List<Flight> getAll(){
-		return flightRepo.findAll();
+		
+		Wing wing = null;
+		try {
+			wing = wingRepo.findById(request.wingId()).orElseThrow(() -> new EntityNotFoundException("Wing not found"));
+		} catch (EntityNotFoundException e) {
+			throw new EntityNotFoundException(e.getMessage());
+		} catch (Exception e) {
+			throw new DatabaseException("Loading flights from database failed");
+		}
+		wing.setTotalFlights(wing.getTotalFlights() + 1);
+		wing.setTotalHours(wing.getTotalHours() + request.duration());
+		try {
+			wingRepo.save(wing);
+		} catch (Exception e) {
+			throw new DatabaseException("Saving wing to database failed");
+		}
+		
+		try {
+			Flight flight = Flight.builder()
+					  .wing(wing)
+					  .location(request.location())
+					  .date(request.date())
+					  .duration(request.duration())
+					  .build();
+			return flightRepo.save(flight);
+		} catch (Exception e) {
+			throw new DatabaseException("Saving flight to database failed");
+		}
 	}
 	
+	List<Flight> getAll() {
+		try {
+			return flightRepo.findAll();
+		} catch (Exception e) {
+			throw new DatabaseException("Loading flights from database failed");
+		}
+		
+	}
 	
 }

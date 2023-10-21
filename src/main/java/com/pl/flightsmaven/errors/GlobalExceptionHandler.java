@@ -1,6 +1,7 @@
 package com.pl.flightsmaven.errors;
 
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -27,8 +28,12 @@ class GlobalExceptionHandler {
 		return ResponseEntity.status(400).body(e.getMessage());
 	}
 	@ExceptionHandler(EntityExistsException.class)
-	ResponseEntity<?> handleEntityExistsExceptionException(EntityExistsException e) {
+	ResponseEntity<?> handleEntityExistsException(EntityExistsException e) {
 		return ResponseEntity.status(409).body(e.getMessage());
+	}
+	@ExceptionHandler(EntityNotFoundException.class)
+	ResponseEntity<?> handleEntityNotFoundException(EntityNotFoundException e) {
+		return ResponseEntity.status(404).body(e.getMessage());
 	}
 	
 	@ExceptionHandler(DatabaseException.class)
@@ -37,6 +42,6 @@ class GlobalExceptionHandler {
 	}
 	@ExceptionHandler(UsernameNotFoundException.class)
 	ResponseEntity<?> handleUsernameNotFoundException(UsernameNotFoundException e) {
-		return ResponseEntity.status(500).body(e.getMessage());
+		return ResponseEntity.status(404).body(e.getMessage());
 	}
 }
