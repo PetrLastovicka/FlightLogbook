@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.pl</groupId>
-	<artifactId>flightlogger</artifactId>
+	<artifactId>flightlogbook</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>flightlogger</name>
-	<description>FlightLogger</description>
+	<name>flight-logbook</name>
+	<description>FlightLogbook</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

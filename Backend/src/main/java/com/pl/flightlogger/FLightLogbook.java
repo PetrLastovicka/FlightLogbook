@@ -7,10 +7,10 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 @EnableConfigurationProperties(RsaKeyProperties.class)
 @SpringBootApplication
-public class FLightLogger {
+public class FLightLogbook {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FLightLogger.class, args);
+		SpringApplication.run(FLightLogbook.class, args);
 	}
 
 }
