@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Wings</title>
+</head>
+<body>
+<div th:fragment="wings">
+    <h1>Wings</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Manufacturer</th>
+            <th>Model</th>
+            <th>Size</th>
+            <th>Total hours</th>
+        </tr>
+        </thead>
+        <tr th:each="wing : ${wings}">
+            <td th:text="${wing.id}">Id</td>
+            <td th:text="${wing.manufacturer}">Manufacturer</td>
+            <td th:text="${wing.model}">Model</td>
+            <td th:text="${wing.size}">Size</td>
+            <td th:text="${wing.totalHours}">Total hours</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/flights")
-public class FlightController {
+public class FlightApiController {
 	final FlightService flightService;
 	@GetMapping
 	ResponseEntity<?> getAll(){

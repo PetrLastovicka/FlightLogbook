@@ -66,7 +66,7 @@ public class FLightLogbook implements CommandLineRunner {
 		Flight flight1 = Flight.builder()
 				  .date(LocalDate.now())
 				  .duration(1.5f)
-				  .location("Basssano")
+				  .location("Bassano")
 				  .build();
 		Flight flight2 = Flight.builder()
 				  .date(LocalDate.now())
