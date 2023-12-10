@@ -42,4 +42,26 @@ public class WingService {
 			throw new DatabaseException("Loading wing from database failed");
 		}
 	}
+	
+	Wing update(Long id, @Valid NewWingDTO request) {
+		if(!wingRepo.existsById(id)){
+			throw new EntityNotFoundException("Wing not found");
+		}
+		try {
+			Wing wing = request.toWing();
+			wing.setId(id);
+			return wingRepo.save(wing);
+		} catch (Exception e) {
+			throw new DatabaseException("Saving wing to database failed");
+		}
+	}
+	Wing delete(Long id) {
+		Wing wing = wingRepo.findById(id).orElseThrow(() -> new EntityNotFoundException("Wing not found"));
+		try {
+			wingRepo.deleteById(id);
+			return wing;
+		} catch (Exception e) {
+			throw new DatabaseException("Deleting wing from database failed");
+		}
+	}
 }
