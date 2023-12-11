@@ -24,8 +24,8 @@ import java.util.Set;
 @SpringBootApplication
 public class FLightLogbook implements CommandLineRunner {
 	private final AppUserRepo userRepo;
-	private final FlightRepo flightRepo;
-	private final WingRepo wingRepo;
+	//private final FlightRepo flightRepo;
+	//private final WingRepo wingRepo;
 	private final PasswordEncoder passwordEncoder;
 	
 	public static void main(String[] args) {
@@ -48,7 +48,7 @@ public class FLightLogbook implements CommandLineRunner {
 				  .password(passwordEncoder.encode("Password"))
 				  .roles(user)
 				  .build());
-		Wing wing1 = wingRepo.save(Wing.builder()
+		/* Wing wing1 = wingRepo.save(Wing.builder()
 				  .manufacturer("UP")
 				  .model("Rimo")
 				  .category(Category.ENA)
@@ -82,6 +82,6 @@ public class FLightLogbook implements CommandLineRunner {
 		flight1.setWing(wing1);
 		flightRepo.save(flight1);
 		flight2.setWing(wing2);
-		flightRepo.save(flight2);
+		flightRepo.save(flight2);*/
 	}
 }
