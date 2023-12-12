@@ -21,6 +21,10 @@ public class WingMvcController {
     @GetMapping("/{id}")
     public String wingDetails(Model model, @PathVariable Long id) {
         model.addAttribute("wing", wingService.getById(id));
-        return "wingDetails";
+        return "wingDetail";
+    }
+    @GetMapping("/new")
+    public String newWing(Model model){
+        return "newWing";
     }
 }

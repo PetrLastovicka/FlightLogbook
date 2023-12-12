@@ -4,7 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.pl.flightlogger.flights.Flight;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -23,16 +27,16 @@ public class Wing {
 	Long id;
 	String manufacturer;
 	String model;
-	String size;
+	String wingSize;
 	@Enumerated(EnumType.STRING)
 	Category category;
 	boolean my;
 	LocalDate purchased;
 	float initialHours;
-	LocalDate nextCheckDate;
-	float nextCheckHours;
 	float totalHours;
 	int totalFlights;
+	LocalDate nextCheckDate;
+	float nextCheckHours;
 	boolean active;
 	//@JsonIgnore
 	@OneToMany(mappedBy = "wing", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

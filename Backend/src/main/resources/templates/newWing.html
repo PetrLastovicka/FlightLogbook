@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>New wing</title>
+    <link rel="stylesheet" th:href="@{/Styles.css}" />
+    <link rel="stylesheet" href="../static/Styles.css" />
+  </head>
+  <body>
+    <div th:fragment="newWing">
+      <h1>Add your new wing</h1>
+
+      <form action="/search" method="post">
+        <label for="search">Search for:</label><br />
+        <div>
+          <input
+            class="field"
+            type="text"
+            placeholder="Model"
+            id="search"
+            name="search"
+          />
+          <input class="button" type="submit" value="Submit" />
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

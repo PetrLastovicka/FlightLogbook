@@ -1,30 +1,35 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
     <title>Wings</title>
-</head>
-<body>
-<div th:fragment="wings">
-    <h1>Wings</h1>
-    <table>
+    <link rel="stylesheet" th:href="@{/Styles.css}" />
+    <link rel="stylesheet" href="../static/Styles.css" />
+  </head>
+  <body>
+    <div th:fragment="wings">
+      <h1>Wings</h1>
+
+      <table>
         <thead>
-        <tr>
-            <th>Id</th>
+          <tr>
             <th>Manufacturer</th>
             <th>Model</th>
             <th>Size</th>
-            <th>Total hours</th>
-        </tr>
+            <th>Active</th>
+          </tr>
         </thead>
         <tr th:each="wing : ${wings}">
-            <td th:text="${wing.id}">Id</td>
-            <td th:text="${wing.manufacturer}">Manufacturer</td>
-            <td th:text="${wing.model}">Model</td>
-            <td th:text="${wing.size}">Size</td>
-            <td th:text="${wing.totalHours}">Total hours</td>
+          <td th:text="${wing.manufacturer}">Manufacturer</td>
+          <td th:text="${wing.model}">Model</td>
+          <td th:text="${wing.wingSize}">Size</td>
+          <td th:text="${wing.active}">Active</td>
+          <!-- <td><a href = "${wing.id}">detail</a></td> -->
+          <td><a th:href = "'/mvc/wings/' + ${wing.id}">detail</a></td>
         </tr>
-    </table>
-</div>
-</body>
+      </table>
+
+      <a href="/mvc/wings/new">Add new wing</a>
+    </div>
+  </body>
 </html>

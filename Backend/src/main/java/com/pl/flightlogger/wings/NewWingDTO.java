@@ -1,10 +1,10 @@
 package com.pl.flightlogger.wings;
 
 
-
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
+
 import java.time.LocalDate;
 
 // TODO: 01.10.2023 fix validation for category and my
@@ -15,7 +15,7 @@ record NewWingDTO (
    @NotBlank
    String model,
    @NotBlank
-   String size,
+   String wingSize,
   // @NotBlank
    @Enumerated(EnumType.STRING)
    Category category,
@@ -29,17 +29,17 @@ record NewWingDTO (
    Wing toWing(){
       return new Wing(
               null,
-             manufacturer,
+              manufacturer,
               model,
-              size,
+              wingSize,
               category,
               my,
               purchased,
               initialHours,
+              initialHours,
+              0,
               nextCheckDate,
               nextCheckHours,
-              initialHours,
-               0,
               true,
               null);
    }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/wings")
 public class WingApiController {
    final WingService wingService;
-   @PostMapping
+  @PostMapping
    ResponseEntity<?> create(@RequestBody @Valid NewWingDTO request){
       return ResponseEntity.status(201).body(wingService.create(request));
    }
