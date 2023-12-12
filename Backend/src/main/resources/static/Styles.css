@@ -1,0 +1,116 @@
+body {
+    box-sizing: border-box;
+}
+
+h1 {
+    display: block;
+    font-size: 3em;
+    text-decoration: none;
+    color: deepskyblue;
+    padding: 0.1em;
+    border-bottom: 2px solid;
+    margin: 10px 0;
+}
+
+h1 a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+nav {
+    margin: 10px 0;
+    display: flex;
+    text-align: center;
+    width: 100%;
+}
+
+nav a {
+    flex: 1;
+    font-size: 1.3em;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+    background-color: red;
+    border-radius: 10px;
+    border: 0;
+    padding: 0.8em 0.5em;
+    margin: 10px 6px 10px 0;
+    box-shadow: 5px 5px gray;
+}
+
+nav a:hover {
+    background-color: lightsalmon;
+    box-shadow: 3px 3px gray;
+}
+
+form {
+    width: auto;
+    display: block;
+    text-align: left;
+    color: hotpink;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+form div {
+    width: auto;
+    font-size: 1em;
+    display: flex;
+    text-align: center;
+    border-radius: 10px
+}
+
+div input.field {
+    flex: 5;
+    font-size: inherit;
+    padding: 0.5em 0.5em;
+    border: solid 2px red;
+    border-radius: inherit;
+    margin-right: 6px;
+}
+
+div input.button {
+    flex: 1;
+    font-size: inherit;
+    font-weight: bold;
+    color: white;
+    background-color: red;
+    padding: 0.5em 0;
+    border: none;
+    border-radius: inherit;
+}
+
+div input.button:hover {
+    background-color: lightsalmon;
+}
+
+table {
+    width: 100%;
+    margin: 10px 0;
+    border-spacing: 5px;
+}
+
+th {
+    width: 20%;
+    font-size: 1.5em;
+    font-weight: bold;
+    background-color: deepskyblue;
+    padding: 0.3em 0.5em;
+}
+
+th.description {
+    width: 40%;
+}
+
+td {
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 0.8em 0.5em;
+    background-color: aliceblue;
+}
+
+td.value {
+    text-align: center;
+}

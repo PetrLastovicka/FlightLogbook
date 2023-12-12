@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>index</title>
+    <link rel="stylesheet" th:href="@{/Styles.css}"/>
 </head>
 <body>
-<p>index</p>
+<h1>index</h1>
+
+<nav>
+    <a href="/mvc/flights">Flights</a>
+    <a href="/mvc/wings">Wings</a>
+</nav>
 </body>
 </html>
