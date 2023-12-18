@@ -1,28 +1,55 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+    <meta charset="UTF-8"/>
     <title>New wing</title>
-    <link rel="stylesheet" th:href="@{/Styles.css}" />
-    <link rel="stylesheet" href="../static/Styles.css" />
-  </head>
-  <body>
-    <div th:fragment="newWing">
-      <h1>Add your new wing</h1>
+    <link rel="stylesheet" th:href="@{/Styles.css}"/>
+    <link rel="stylesheet" href="../static/Styles.css"/>
+</head>
+<body>
+<div th:fragment="newWing">
+    <h1>Add your new wing</h1>
 
-      <form action="/search" method="post">
-        <label for="search">Search for:</label><br />
-        <div>
-          <input
-            class="field"
-            type="text"
-            placeholder="Model"
-            id="search"
-            name="search"
-          />
-          <input class="button" type="submit" value="Submit" />
-        </div>
-      </form>
-    </div>
-  </body>
+    <form action="/new" method="post">
+        <label for="manufacturer">Manufacturer</label>
+        <input
+                class="field"
+                type="text"
+                placeholder="UP"
+                id="manufacturer"
+                name="manufacturer"
+        /><br/>
+
+        <label for="model">Model</label>
+        <input
+                class="field"
+                type="text"
+                placeholder="Rimo"
+                id="model"
+                name="model"
+        /><br/>
+
+        <label for="size">Size</label>
+        <input
+                class="field"
+                type="text"
+                placeholder="S/M"
+                id="size"
+                name="size"
+        /><br/>
+
+        <label for="category">Category</label>
+        <input
+                class="field"
+                type="text"
+                placeholder="ENA"
+                id="category"
+                name="category"
+        /><br/>
+
+        <input class="button" type="submit" value="Submit"/>
+
+    </form>
+</div>
+</body>
 </html>
