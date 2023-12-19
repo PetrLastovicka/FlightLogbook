@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>New wing</title>
+	<link rel="stylesheet" th:href="@{/Styles.css}" />
+	<link rel="stylesheet" href="../static/Styles.css" />
+</head>
+
+<body>
+	<div th:fragment="newWing">
+		<h1>Add your new wing</h1>
+
+		<form action="/new" method="post">
+			<div>
+				<input type="radio" checked="true" id="my" name="my" value="true" />
+				<label for="my">It's my wing</label>
+				<input type="radio" id="borrowed" name="my" value="false" />
+				<label for="borrowed">It's borrowed wing</label>
+			</div>
+			<div>
+				<input type="radio" id="used" name="used" value="false" />
+				<label for="used">It's used wing</label>
+			</div>
+			<div>
+				<input type="radio" id="active" name="active" value="true" />
+				<label for="active">Active</label>
+			</div>
+
+
+			<div class="common">
+				<label for="manufacturer">Manufacturer</label>
+				<input class="field" id="manufacturer" type="text" placeholder="UP" name="manufacturer" /><br />
+			</div>
+			<div class="common">
+				<label for="model">Model</label>
+				<input class="field" id="model" type="text" placeholder="Rimo" name="model" /><br />
+			</div>
+			<div class="common">
+				<label for="size">Size</label>
+				<input class="field" id="size" type="text" placeholder="S/M" name="size" /><br />
+			</div>
+			<div class="common">
+				<label for="category">Category</label>
+				<input class="field" id="category" type="text" placeholder="ENA" name="category" /><br />
+			</div>
+			<div class="my"></div>
+			<label for="purchased">Purchase date</label>
+			<input class="field" id="purchased" type="text" placeholder="2021-11-01" name="purchased" /><br />
+		</div>
+		<div class="used"></div>
+			<label for="initialHours">Initial hours</label>
+			<input class="field" id="initialHours" type="text" placeholder="50" name="initialHours" /><br />
+		</div>
+		<div class="edit"></div>
+			<label for="totalHours">Total hours</label>
+			<input class="field" id="totalHours" type="text" placeholder="100" name="totalHours" /><br />
+		</div>
+		<div class="edit"></div>
+			<label for="totalFlights">Total flights</label>
+			<input class="field" id="totalFlights" type="text" placeholder="20" name="totalFlights" /><br />
+		</div>
+		<div class="my"></div>
+			<label for="nextCheckDate">Next check date</label>
+			<input class="field" id="nextCheckDate" type="text" placeholder="2021-11-01" name="nextCheckDate" /><br />
+		</div>
+		<div class="my"></div>
+			<label for="nextCheckHours">Next check hours</label>
+			<input class="field" id="nextCheckHours" type="text" placeholder="200" name="nextCheckHours" /><br />
+		</div>
+
+			<input class="button" type="submit" value="Submit" />
+
+		</form>
+	</div>
+</body>
+
+</html>
