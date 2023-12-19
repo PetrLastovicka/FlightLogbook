@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+	
 
 <head>
 	<meta charset="UTF-8" />
-	<title>New wing</title>
+	<title>Wing input</title>
 	<link rel="stylesheet" th:href="@{/wingInput.css}" />
-	<link rel="stylesheet" href="../static/wingInput.css" />
+	
 </head>
 
 <body>
-	<div th:fragment="newWing">
-		<h1>Add your new wing</h1>
+	<div th:fragment="wingInput">
+		<h1 th:text="${title}">Add new wing</h1>
 
-		<form action="/new" method="post">
+		<form id="form" action="/mvc/wings/new" method="post">
 			<div>
 				<input type="radio" checked="true" id="my" name="my" value="true" />
 				<label for="my">It's my wing</label>
 				<input type="radio" id="borrowed" name="my" value="false" />
 				<label for="borrowed">It's borrowed wing</label>
 			</div>
-			<div>
+			<div class="new">
 				<input type="radio" id="used" name="used" value="false" />
 				<label for="used">It's used wing</label>
 			</div>
@@ -31,49 +32,71 @@
 
 			<div class="common">
 				<label for="manufacturer">Manufacturer</label>
-				<input class="field" id="manufacturer" type="text" placeholder="UP" name="manufacturer" />
+				<input class="field" id="manufacturer" type="text" placeholder="UP" name="manufacturer"
+					th:value="${wing.manufacturer}" />
 			</div>
 			<div class="common">
 				<label for="model">Model</label>
-				<input class="field" id="model" type="text" placeholder="Rimo" name="model" />
+				<input class="field" id="model" type="text" placeholder="Rimo" name="model" value="model"
+					th:value="${wing.model}" />
 			</div>
 			<div class="common">
 				<label for="size">Size</label>
-				<input class="field" id="size" type="text" placeholder="S/M" name="size" />
+				<input class="field" id="size" type="text" placeholder="S/M" name="wingSize"
+					th:value="${wing.wingSize}" />
 			</div>
 			<div class="common">
 				<label for="category">Category</label>
-				<input class="field" id="category" type="text" placeholder="ENA" name="category" />
+				<input class="field" id="category" type="text" placeholder="ENA" name="category"
+					th:value="${wing.category}" />
 			</div>
 			<div class="my">
 				<label for="purchased">Purchase date</label>
-				<input class="field" id="purchased" type="text" placeholder="2021-11-01" name="purchased" />
+				<input class="field" id="purchased" type="text" placeholder="2021-11-01" name="purchased"
+					th:value="${wing.purchased}" />
 			</div>
 			<div class="used">
 				<label for="initialHours">Initial hours</label>
-				<input class="field" id="initialHours" type="text" placeholder="50" name="initialHours" />
+				<input class="field" id="initialHours" type="text" placeholder="50" name="initialHours"
+					th:value="${wing.initialHours}" />
 			</div>
 			<div class="edit">
 				<label for="totalHours">Total hours</label>
-				<input class="field" id="totalHours" type="text" placeholder="100" name="totalHours" />
+				<input class="field" id="totalHours" type="text" placeholder="100" name="totalHours"
+					th:value="${wing.totalHours}" />
 			</div>
 			<div class="edit">
 				<label for="totalFlights">Total flights</label>
-				<input class="field" id="totalFlights" type="text" placeholder="20" name="totalFlights" />
+				<input class="field" id="totalFlights" type="text" placeholder="20" name="totalFlights"
+					th:value="${wing.totalFlights}" />
 			</div>
 			<div class="my">
 				<label for="nextCheckDate">Next check date</label>
-				<input class="field" id="nextCheckDate" type="text" placeholder="2021-11-01" name="nextCheckDate" />
+				<input class="field" id="nextCheckDate" type="text" placeholder="2021-11-01" name="nextCheckDate"
+					th:value="${wing.nextCheckDate}" />
 			</div>
 			<div class="my">
 				<label for="nextCheckHours">Next check hours</label>
-				<input class="field" id="nextCheckHours" type="text" placeholder="200" name="nextCheckHours" />
+				<input class="field" id="nextCheckHours" type="text" placeholder="200" name="nextCheckHours"
+					th:value="${wing.nextCheckHours}" />
 			</div>
 
-			<input class="button" type="submit" value="Submit" />
+			<input class="button" type="button" onclick="submit()" value="Submit" />
 
 		</form>
 	</div>
+
+	<script>
+
+		document.getElementById("form").addEventListener("submit", function (event) {
+			event.preventDefault();
+		});
+
+		var formData = new FormData(form);
+		// output as an object
+		console.log(Object.fromEntries(formData));
+
+	</script>
 </body>
 
 </html>
