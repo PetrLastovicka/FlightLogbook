@@ -11,64 +11,54 @@
 
 <body>
 	<div th:fragment="New wing">
-		<h1>Add yournew wing</h1>
+		<h1>Add your new wing</h1>
 
 		<form id="form" action="" method="post">
-			<div>
+			<div id='checkMy'>
 				<input type="radio" checked="true" id="my" name="my" value="true" />
 				<label for="my">It's my wing</label>
 				<input type="radio" id="borrowed" name="my" value="false" />
 				<label for="borrowed">It's borrowed wing</label>
 			</div>
-			<div class="new">
-				<input type="radio" id="used" name="used" value="false" />
+			<div id=usedDiv>
+				<input type="checkbox" id="used" name="used" value="false" />
 				<label for="used">It's used wing</label>
 			</div>
+
 			<div>
-				<input type="radio" id="active" name="active" value="true" />
-				<label for="active">Active</label>
-			</div>
-
-
-			<div class="common">
 				<label for="manufacturer">Manufacturer</label>
-				<input class="field" id="manufacturer" type="text" placeholder="UP" name="manufacturer" />
+				<input class="field" id="manufacturer" type="text" placeholder="UP" name="manufacturer" required />
 			</div>
-			<div class="common">
+			<div>
 				<label for="model">Model</label>
-				<input class="field" id="model" type="text" placeholder="Rimo" name="model" />
+				<input class="field" id="model" type="text" placeholder="Rimo" name="model" required />
 			</div>
-			<div class="common">
+			<div>
 				<label for="size">Size</label>
-				<input class="field" id="size" type="text" placeholder="S/M" name="wingSize" />
+				<input class="field" id="size" type="text" placeholder="S/M" name="wingSize" required />
 			</div>
-			<div class="common">
+			<div>
 				<label for="category">Category</label>
-				<input class="field" id="category" type="text" placeholder="ENA" name="category" />
+				<input class="field" id="category" type="text" placeholder="ENA" name="category" required />
 			</div>
-			<div class="my">
-				<label for="purchased">Purchase date</label>
-				<input class="field" id="purchased" type="text" placeholder="2021-11-01" name="purchased" />
-			</div>
-			<div class="used">
-				<label for="initialHours">Initial hours</label>
-				<input class="field" id="initialHours" type="text" placeholder="50" name="initialHours" />
-			</div>
-			<div class="edit">
-				<label for="totalHours">Total hours</label>
-				<input class="field" id="totalHours" type="text" placeholder="100" name="totalHours" />
-			</div>
-			<div class="edit">
-				<label for="totalFlights">Total flights</label>
-				<input class="field" id="totalFlights" type="text" placeholder="20" name="totalFlights" />
-			</div>
-			<div class="my">
-				<label for="nextCheckDate">Next check date</label>
-				<input class="field" id="nextCheckDate" type="text" placeholder="2021-11-01" name="nextCheckDate" />
-			</div>
-			<div class="my">
-				<label for="nextCheckHours">Next check hours</label>
-				<input class="field" id="nextCheckHours" type="text" placeholder="200" name="nextCheckHours" />
+
+			<div id=myWing>
+				<div>
+					<label for="purchased">Purchase date</label>
+					<input class="field" id="purchased" type="text" placeholder="2021-11-01" name="purchased" />
+				</div>
+				<div id=usedWing style="display: none;">
+					<label for="initialHours">Initial hours</label>
+					<input class="field" id="initialHours" type="text" placeholder="50" name="initialHours" />
+				</div>
+				<div>
+					<label for="nextCheckDate">Next check date</label>
+					<input class="field" id="nextCheckDate" type="text" placeholder="2021-11-01" name="nextCheckDate" />
+				</div>
+				<div>
+					<label for="nextCheckHours">Next check hours</label>
+					<input class="field" id="nextCheckHours" type="text" placeholder="200" name="nextCheckHours" />
+				</div>
 			</div>
 
 			<input class="button" type="submit" value="Submit" />
@@ -80,6 +70,34 @@
 
 		const form = document.getElementById("form");
 		form.addEventListener('submit', (e) => addWing(e));
+
+		const myWing = document.getElementById("myWing");
+		const usedWing = document.getElementById("usedWing");
+		const usedDiv = document.getElementById("usedDiv");
+
+		const checkMy = document.getElementById("checkMy");
+		const my = document.getElementById("my");
+
+		checkMy.addEventListener('change', () => {
+			if (my.checked) {
+				myWing.style.display = 'block';
+				usedDiv.style.display = 'block';
+			} else {
+				myWing.style.display = 'none';
+				usedDiv.style.display = 'none';
+			}
+
+		});
+
+		const used = document.getElementById("used");
+		used.addEventListener('change', () => {
+			if (used.checked) {
+				usedWing.style.display = "block";
+			} else {
+				usedWing.style.display = "none";
+			}
+		});
+
 
 		function addWing(e) {
 			e.preventDefault();
@@ -94,13 +112,15 @@
 				},
 				body: JSON.stringify(obj)
 			};
-			
+
 			fetch(url, options)
-				.then(response => response.json())
-				.then(data => console.log(data))
 				.catch(error => console.log(error));
-				
+
 		}
+
+
+
+
 
 
 	</script>

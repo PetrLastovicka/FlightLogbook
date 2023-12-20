@@ -9,8 +9,9 @@
 <body>
 <div th:fragment="wingDetails">
     <h1>Wing details</h1>
-    <table>
+    <a href="/mvc/wings">Back to wings list</a>
 
+    <table>
         <tr>
             <th>Id</th>
             <td th:text="${wing.id}">Id</td>
@@ -30,6 +31,10 @@
         <tr>
             <th>Category</th>
             <td th:text="${wing.category}">Category</td>
+        </tr>
+        <tr>
+            <th>My wing</th>
+            <td th:text="${wing.my}">My wing</td>
         </tr>
         <tr>
             <th>Purchased</th>
