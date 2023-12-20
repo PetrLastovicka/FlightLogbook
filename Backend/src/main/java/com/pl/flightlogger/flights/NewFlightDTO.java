@@ -7,7 +7,7 @@ import java.time.LocalTime;
 
 // TODO: 01.10.2023  fix validation
 record NewFlightDTO(
-		  //@NotBlank(message = "Wing Id is mandatory")
+
 		  Long wingId,
 		  @NotBlank(message = "Location is mandatory")
 		  String location,

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+	<meta charset="UTF-8" />
+	<title>New wing</title>
+	<link rel="stylesheet" th:href="@{/wingInput.css}" />
+
+</head>
+
+<body>
+	<div th:fragment="New wing">
+		<h1>Add yournew wing</h1>
+
+		<form id="form" action="" method="post">
+			<div>
+				<input type="radio" checked="true" id="my" name="my" value="true" />
+				<label for="my">It's my wing</label>
+				<input type="radio" id="borrowed" name="my" value="false" />
+				<label for="borrowed">It's borrowed wing</label>
+			</div>
+			<div class="new">
+				<input type="radio" id="used" name="used" value="false" />
+				<label for="used">It's used wing</label>
+			</div>
+			<div>
+				<input type="radio" id="active" name="active" value="true" />
+				<label for="active">Active</label>
+			</div>
+
+
+			<div class="common">
+				<label for="manufacturer">Manufacturer</label>
+				<input class="field" id="manufacturer" type="text" placeholder="UP" name="manufacturer" />
+			</div>
+			<div class="common">
+				<label for="model">Model</label>
+				<input class="field" id="model" type="text" placeholder="Rimo" name="model" />
+			</div>
+			<div class="common">
+				<label for="size">Size</label>
+				<input class="field" id="size" type="text" placeholder="S/M" name="wingSize" />
+			</div>
+			<div class="common">
+				<label for="category">Category</label>
+				<input class="field" id="category" type="text" placeholder="ENA" name="category" />
+			</div>
+			<div class="my">
+				<label for="purchased">Purchase date</label>
+				<input class="field" id="purchased" type="text" placeholder="2021-11-01" name="purchased" />
+			</div>
+			<div class="used">
+				<label for="initialHours">Initial hours</label>
+				<input class="field" id="initialHours" type="text" placeholder="50" name="initialHours" />
+			</div>
+			<div class="edit">
+				<label for="totalHours">Total hours</label>
+				<input class="field" id="totalHours" type="text" placeholder="100" name="totalHours" />
+			</div>
+			<div class="edit">
+				<label for="totalFlights">Total flights</label>
+				<input class="field" id="totalFlights" type="text" placeholder="20" name="totalFlights" />
+			</div>
+			<div class="my">
+				<label for="nextCheckDate">Next check date</label>
+				<input class="field" id="nextCheckDate" type="text" placeholder="2021-11-01" name="nextCheckDate" />
+			</div>
+			<div class="my">
+				<label for="nextCheckHours">Next check hours</label>
+				<input class="field" id="nextCheckHours" type="text" placeholder="200" name="nextCheckHours" />
+			</div>
+
+			<input class="button" type="submit" value="Submit" />
+
+		</form>
+	</div>
+
+	<script>
+
+		const form = document.getElementById("form");
+		form.addEventListener('submit', (e) => addWing(e));
+
+		function addWing(e) {
+			e.preventDefault();
+			const formData = new FormData(form);
+			const obj = Object.fromEntries(formData);
+
+			const url = 'http://localhost:8080/mvc/wings/new';
+			const options = {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(obj)
+			};
+			
+			fetch(url, options)
+				.then(response => response.json())
+				.then(data => console.log(data))
+				.catch(error => console.log(error));
+				
+		}
+
+
+	</script>
+</body>
+
+</html>

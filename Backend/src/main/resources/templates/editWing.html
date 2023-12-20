@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-	
+
 
 <head>
 	<meta charset="UTF-8" />
-	<title>Wing input</title>
+	<title>New wing</title>
 	<link rel="stylesheet" th:href="@{/wingInput.css}" />
-	
+
 </head>
 
 <body>
 	<div th:fragment="wingInput">
-		<h1 th:text="${title}">Add new wing</h1>
+		<h1>Add yournew wing</h1>
 
-		<form id="form" action="/mvc/wings/new" method="post">
+		<form id="form" action="" method="post">
 			<div>
 				<input type="radio" checked="true" id="my" name="my" value="true" />
 				<label for="my">It's my wing</label>
@@ -88,13 +88,28 @@
 
 	<script>
 
-		document.getElementById("form").addEventListener("submit", function (event) {
-			event.preventDefault();
-		});
+		const form = document.getElementById("form");
+		form.addEventListener('submit', (e) => addWing(e));
 
-		var formData = new FormData(form);
-		// output as an object
-		console.log(Object.fromEntries(formData));
+		function addWing(e) {
+			e.preventDefault();
+			const formData = new FormData(form);
+			const obj = Object.fromEntries(formData);
+			
+			const url = 'http://localhost:8080/mvc/wings/new';
+			const options = {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(data)
+			};
+			fetch(url, options)
+				.then(response => response.json())
+				.then(data => console.log(data))
+				.catch(error => console.log(error));
+		}
+		
 
 	</script>
 </body>

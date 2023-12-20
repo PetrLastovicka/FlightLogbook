@@ -1,5 +1,6 @@
 package com.pl.flightlogger.wings;
 
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,10 +27,10 @@ public class WingMvcController {
     @GetMapping("/new")
     public String newWingForm(Model model){
         model.addAttribute("title", "Add your new wing");
-        return "wingInput";
+        return "newWing";
     }
     @PostMapping("/new")
-    public String newWing(Model model, @RequestBody NewWingDTO request){
+    public String newWing(Model model, @RequestBody @Valid NewWingDTO request){
         Wing wing = wingService.create(request);
         model.addAttribute("wing", wing);
         return "wingDetails";

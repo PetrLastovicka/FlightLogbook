@@ -8,13 +8,13 @@ import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 // TODO: 01.10.2023 fix validation for category and my
-record NewWingDTO (
+public record NewWingDTO (
    
-   @NotBlank
+   @NotBlank(message = "Manufacturer is mandatory")
    String manufacturer,
-   @NotBlank
+   @NotBlank(message = "Model is mandatory")
    String model,
-   @NotBlank
+   @NotBlank(message = "Size is mandatory")
    String wingSize,
   // @NotBlank
    @Enumerated(EnumType.STRING)
