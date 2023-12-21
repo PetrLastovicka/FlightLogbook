@@ -41,10 +41,9 @@
         const id = button.parentElement.parentElement.firstElementChild.textContent
         console.log(id);
         fetch(`/mvc/wings/${id}`, {
-          method: 'DELETE'          
+          method: 'DELETE'
         })
-        debugger
-         // .then(() => window.location.reload())
+          .then(() => window.location.reload())
       });
     });
   </script>
