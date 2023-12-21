@@ -5,13 +5,13 @@
   <meta charset="UTF-8" />
   <title>Wings</title>
   <link rel="stylesheet" th:href="@{/Styles.css}" />
-  <link rel="stylesheet" href="../static/Styles.css" />
+  <!--<link rel="stylesheet" href="../static/Styles.css" /> -->
 </head>
 
 <body>
   <div th:fragment="wings">
     <h1>Wings</h1>
-    
+
 
     <table>
       <thead>
@@ -22,15 +22,32 @@
         </tr>
       </thead>
       <tr th:each="wing : ${wings}">
+        <td style="display: none;" th:text="${wing.id}">id</td>
         <td th:text="${wing.manufacturer}">Manufacturer</td>
         <td th:text="${wing.model}">Model</td>
         <td th:text="${wing.wingSize}">Size</td>
-        <td><a th:href="'/mvc/wings/' + ${wing.id}">detail</a></td>
+        <td><a th:href="'/mvc/wings/' + ${wing.id}">Details</a></td>
+        <td><button class='delete'>Delete</button></td>
       </tr>
     </table>
 
     <a href="/mvc/wings/new">Add new wing</a>
   </div>
+
+  <script>
+    const deleteButtons = document.querySelectorAll('.delete');
+    deleteButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const id = button.parentElement.parentElement.firstElementChild.textContent
+        console.log(id);
+        fetch(`/mvc/wings/${id}`, {
+          method: 'DELETE'          
+        })
+        debugger
+         // .then(() => window.location.reload())
+      });
+    });
+  </script>
 </body>
 
 </html>

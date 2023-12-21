@@ -1,8 +1,8 @@
 
-INSERT INTO wings (manufacturer, model, wing_size, category, my, purchased, initial_hours, total_hours,
+INSERT INTO wings (manufacturer, model, wing_size, category, my, purchased, initial_hours, my_hours, total_hours,
 total_flights, next_check_date, next_check_hours, active)
-VALUES ('ElSpeedo', 'Bobby', 'S', 'ENA', false, null, 0, 0, 0, null, 0, false),
-('UP', 'Rimo', 'S/M', 'ENA', true, null, 0, 0, 0, null, 220, true);
+VALUES ('ElSpeedo', 'Bobby', 'S', 'ENA', false, null, 0, 0, 0, 0, null, 0, false),
+('UP', 'Rimo', 'S/M', 'ENA', true, null, 0, 0, 0, 0, null, 220, true);
 
 
 

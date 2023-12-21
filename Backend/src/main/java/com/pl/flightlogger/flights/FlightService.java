@@ -27,6 +27,7 @@ public class FlightService {
 			throw new DatabaseException("Loading flights from database failed");
 		}
 		wing.setTotalFlights(wing.getTotalFlights() + 1);
+		wing.setMyHours(wing.getMyHours() + request.duration());
 		wing.setTotalHours(wing.getTotalHours() + request.duration());
 		try {
 			wingRepo.save(wing);

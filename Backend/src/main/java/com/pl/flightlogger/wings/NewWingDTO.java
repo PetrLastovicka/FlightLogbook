@@ -36,6 +36,7 @@ public record NewWingDTO (
               my,
               purchased,
               initialHours,
+              0,
               initialHours,
               0,
               nextCheckDate,

@@ -1,70 +1,86 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
     <title>WingDetails</title>
     <link rel="stylesheet" th:href="@{/Styles.css}" />
     <link rel="stylesheet" href="../static/Styles.css" />
 </head>
-<body>
-<div th:fragment="wingDetails">
-    <h1>Wing details</h1>
-    <a href="/mvc/wings">Back to wings list</a>
 
-    <table>
-        <tr>
-            <th>Id</th>
-            <td th:text="${wing.id}">Id</td>
-        </tr>
-        <tr>
-            <th>Manufacturer</th>
-            <td th:text="${wing.manufacturer}">Manufacturer</td>
-        </tr>
-        <tr>
-            <th>Model</th>
-            <td th:text="${wing.model}">Model</td>
-        </tr>
-        <tr>
-            <th>Size</th>
-            <td th:text="${wing.wingSize}">Size</td>
-        </tr>
-        <tr>
-            <th>Category</th>
-            <td th:text="${wing.category}">Category</td>
-        </tr>
-        <tr>
-            <th>My wing</th>
-            <td th:text="${wing.my}">My wing</td>
-        </tr>
-        <tr>
-            <th>Purchased</th>
-            <td th:text="${wing.purchased}">Purchased</td>
-        </tr>
-        <tr>
-            <th>Initial hours</th>
-            <td th:text="${wing.initialHours}">Initial hours</td>
-        </tr>
-        <tr>
-            <th>Total hours</th>
-            <td th:text="${wing.totalHours}">Total hours</td>
-        </tr>
-        <tr>
-            <th>Total flights</th>
-            <td th:text="${wing.totalFlights}">Total flights</td>
-        </tr>
-        <tr>
-            <th>Next check date</th>
-            <td th:text="${wing.nextCheckDate}">Next check date</td>
-        </tr>
-        <tr>
-            <th>Next check hours</th>
-            <td th:text="${wing.nextCheckHours}">Next check hours</td>
-        </tr>
-        <tr>
-            <th>Active</th>
-            <td th:text="${wing.active}"> Active</td>
-        </tr>
-    </table>
-</div>
+<body>
+    <div th:fragment="wingDetails">
+        <h1 th:text=" ${title}">Wing details</h1>
+        <a href="/mvc/wings">Back to wings list</a>
+
+        <table>
+            <tr>
+                <th>Manufacturer</th>
+                <td th:text="${wing.manufacturer}">Manufacturer</td>
+            </tr>
+            <tr>
+                <th>Model</th>
+                <td th:text="${wing.model}">Model</td>
+            </tr>
+            <tr>
+                <th>Size</th>
+                <td th:text="${wing.wingSize}">Size</td>
+            </tr>
+            <tr>
+                <th>Category</th>
+                <td th:text="${wing.category}">Category</td>
+            </tr>
+            <tr style='display: none;'>
+                <th>My wing</th>
+                <td id='my' th:text="${wing.my}">My wing</td>
+            </tr>
+            <tr class='myWing'>
+                <th>Purchased</th>
+                <td th:text="${wing.purchased}">Purchased</td>
+            </tr>
+            <tr class='myWing'>
+                <th>Initial hours</th>
+                <td th:text="${wing.initialHours}">Initial hours</td>
+            </tr>
+            <tr>
+                <th>My hours</th>
+                <td th:text="${wing.myHours}">Initial hours</td>
+            </tr>
+            <tr class='myWing'>
+                <th>Total hours</th>
+                <td th:text="${wing.totalHours}">Total hours</td>
+            </tr>
+            <tr>
+                <th>Total flights</th>
+                <td th:text="${wing.totalFlights}">Total flights</td>
+            </tr>
+            <tr class='myWing'>
+                <th>Next check date</th>
+                <td th:text="${wing.nextCheckDate}">Next check date</td>
+            </tr>
+            <tr class='myWing'>
+                <th>Next check hours</th>
+                <td th:text="${wing.nextCheckHours}">Next check hours</td>
+            </tr>
+            <tr style="display: none;">
+                <th>Active</th>
+                <td th:text="${wing.active}"> Active</td>
+            </tr>
+        </table>
+    </div>
+    <script>
+
+        const myWing = document.querySelectorAll('.myWing');
+        const my = document.getElementById('my').innerText;
+        console.log(my);
+        console.log(myWing);
+
+        if (my == 'false') {
+            myWing.forEach(element => {
+                element.style.display = 'none';
+            });
+        }
+    </script>
 </body>
+
 </html>

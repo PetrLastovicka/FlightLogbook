@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>New wing</title>
-	<link rel="stylesheet" th:href="@{/wingInput.css}" />
+	<link rel="stylesheet" th:href="@{/Styles.css}" />
 
 </head>
 
@@ -114,6 +114,8 @@
 			};
 
 			fetch(url, options)
+				.then(response => response.text())
+				.then(html => document.body.innerHTML = html)
 				.catch(error => console.log(error));
 
 		}

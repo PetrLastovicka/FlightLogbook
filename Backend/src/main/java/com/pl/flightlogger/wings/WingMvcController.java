@@ -31,10 +31,17 @@ public class WingMvcController {
     @PostMapping("/new")
     public String newWing(Model model, @RequestBody @Valid NewWingDTO request){
       Wing wing = wingService.create(request);
+        model.addAttribute("title", "New wing has been added");
         model.addAttribute("wing", wing);
-        return "created";
+        return "wingDetails";
     }
 
+    @ResponseBody
+    @DeleteMapping("{id}")
+    public String deleteWing(@PathVariable Long id) {
+        wingService.delete(id);
+        return "Wing id " + id + " deleted";
+    }
     @GetMapping("/edit/{id}")
     public String editWingForm(Model model,@PathVariable Long id){
         model.addAttribute("title", "Edit your wing");

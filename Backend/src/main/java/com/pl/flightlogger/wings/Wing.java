@@ -33,6 +33,7 @@ public class Wing {
 	boolean my;
 	LocalDate purchased;
 	float initialHours;
+	float myHours;
 	float totalHours;
 	int totalFlights;
 	LocalDate nextCheckDate;
